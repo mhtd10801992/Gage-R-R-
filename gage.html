@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gage R&R Tool</title>
+  <link rel="stylesheet" href="./sty.css">
+</head>
+<body>
+     <div class="spacer">
+  <h1>Gage R&R Calculator</h1>
+ 
+   
+
+    </div>
+
+  <!-- Operator and Part Input -->
+  <div class="input-section">
+    <label for="operator">Operator:</label>
+    <input type="text" id="operator" placeholder="Enter operator name" required>
+
+    <label for="part">Part:</label>
+    <input type="text" id="part" placeholder="Enter part name" required>
+
+    <button onclick="applyHeader()">Apply</button>
+  
+  </div>
+<section class="header-info">
+  <!-- Measurement Table -->
+   <div class="table-container">
+  <h2>Measurements</h2>
+  <table id="measurementTable">
+    <thead>
+      <tr><th>#</th><th>Measurement</th></tr>
+    </thead>
+    <tbody>
+      <!-- 50 empty rows -->
+      <script>
+        for (let i = 1; i <= 50; i++) {
+          document.write(`<tr><td>${i}</td><td contenteditable="true"></td></tr>`);
+        }
+      </script>
+    </tbody>
+  </table>
+  </div>
+<div class="formula-container">
+  <h2>Repeatability Formula</h2>
+  <p>
+    <strong>Repeatability</strong> measures the variation when the same operator measures the same part multiple times using the same tool.
+  </p>
+  <p>
+    The formula used is:
+    <br><br>
+    <code>
+      Repeatability = Average of Variance within each Part group
+    </code>
+  </p>
+  <p>
+    For each part:
+    <br>
+    <code>
+      Variance = Σ(measurement − mean)² / n
+    </code>
+    <br>
+    Then we average these variances across all parts.
+  </p>
+ </div>
+ <div class="interpretation-container">
+  <h3>Repeatability Interpretation Table</h3>
+  <table class="repeatability-table">
+    <thead>
+      <tr>
+        <th>Repeatability Value</th>
+        <th>Effectiveness Rating</th>
+        <th>Interpretation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>0.95 – 1.00</td>
+        <td>Excellent</td>
+        <td>Highly consistent and reliable</td>
+      </tr>
+      <tr>
+        <td>0.85 – 0.94</td>
+        <td>Good</td>
+        <td>Minor variation, acceptable</td>
+      </tr>
+      <tr>
+        <td>0.70 – 0.84</td>
+        <td>Moderate</td>
+        <td>Some variation, may need improvement</td>
+      </tr>
+      <tr>
+        <td>0.50 – 0.69</td>
+        <td>Poor</td>
+        <td>Inconsistent, unreliable</td>
+      </tr>
+      <tr>
+        <td>&lt; 0.50</td>
+        <td>Unacceptable</td>
+        <td>Too much variation, not trustworthy</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</section>
+<section class="button-section">
+  
+<button onclick="exportTableToCSV()">Export Table as CSV</button>
+
+  <button onclick="storeMeasurements()">Calculate</button>
+  <button onclick="exportChartAsImage()">Export Chart as PNG</button>
+
+</section>
+  <pre id="output"></pre>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script src="./scri.js"></script>
+</body>
+</html>
